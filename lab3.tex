@@ -1,0 +1,66 @@
+\documentclass{article}
+\bibliographystyle{ieeetran}
+% The first of these two packages allow for accented characters to be copied
+% from the resulting PDF properly, and the second package allows for accented
+% characters to be entered in the TeX file
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Clickable hyperlinks in the report with \url
+\usepackage[hyphens]{url}
+
+% Makes it easy to refer to listings, figures, and the likes of them with
+% \autoref{labelName}
+\usepackage{hyperref}
+
+% Enable to insert images
+\usepackage{graphicx} 
+
+% The listings package is useful for including source code in the report.
+% It provides (among other things):
+%   * lstlisting environment for listing code directly
+%   * lstinputlistings command for listing code from a file
+%   * lstinline command for code appearing in the middle of a sentence
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Increases the chance that things will fit on a line properly :)
+\usepackage{fullpage}
+
+% Make enumerate go (a), (b), ... instead of 1., 2., ...
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+% ... and then I., II., ... instead of (a), (b), ...
+\renewcommand{\labelenumii}{\Roman{enumii}.}
+
+% The enumerate package and \begin{enumerate}[(a)] or the likes of it can be
+% used to break the norm though
+\usepackage{enumerate}
+
+% Avoids "code" duplication
+\newcommand{\highergradesonly}{[\textbf{higher grades only}]}
+
+% Possibly useful things for making the text more readable
+\newcommand{\program}[1]{#1}
+\newcommand{\service}[1]{#1}
+\newcommand{\command}[1]{#1}
+\newcommand{\code}[1]{#1}
+\newcommand{\exploitname}[1]{\textit{#1}}
+\newcommand{\msexploit}[1]{#1}
+\newcommand{\option}[1]{#1}
+\newcommand{\payloadname}[1]{#1}
+\newcommand{\ipaddress}[1]{#1}
+\newcommand{\ip}[1]{\ipaddress{#1}}
+\newcommand{\filename}[1]{#1}
+
+\title{\textbf{Secure Computer Systems I: Lab 3}}
+\author{Ren Li \and Tianyao Ma \and Samuel Pettersson}
+
+\begin{document}
+\maketitle
+\input{host1}
+\input{host2}
+\input{host3}
+\input{host4}
+\bibliography{lab3}
+\end{document}
