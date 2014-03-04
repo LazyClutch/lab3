@@ -1,1 +1,27 @@
 \section*{Host 4: 192.168.233.30}
+An \program{nmap} scan of the fourth and final victim showed that there were two services running on the host, namely, an SSH service and an HTTP service. The command and the most important parts of its output is shown below.
+\verbatiminput{nmap_30.txt}
+The \flag{v} flag specifies verbose output, and the \flag{A} flag specifies that OS and service detection (among other things) should be carried out.
+
+Neither of the services appeared to have vulnerabilities that could easily be exploited, so, seeing as we knew no users on the system, it was a natural decision to look for information at the website that the HTTP server hosted first. Browsing to \myurl{192.168.233.30} in a web browser showed the website of Nuyorican Poets Cafe. When looking at the page on the history of the cafe (\myurl{192.168.233.30/history.php}), three particularly interesting names were found: Daniel Gallant, Jason Quinones, and Mahogany Browne, listed as programmers. Furthermore, there were mailto links that would indicate that their usernames were \user{daniel}, \user{jason}, and \user{mobrowne}.
+
+With these usernames, we could carry out a dictionary attack on their accounts over SSH. The tool that we used for this was the network logon cracker \program{THC-Hydra}\cite{hydra}, and the word list provided to the program was the list of common Unix passwords available in \directory{/opt/backbox/msf/data/wordlists/} on our BackBox system. Within a few minutes, \program{Hydra} had discovered that \password{cuteme} was the password for the user \user{jason}. The important lines of output are shown below:
+\verbatiminput{hydra_output_30.txt}
+The obtained credentials for \user{jason} were used to log on via SSH. Running the command \command{sudo -l} to list the commands allowed for \user{jason} showed that he was allowed to run any command. The command \command{find / -name *secret*} was issued to find the secret file, and it showed that a file by the name \file{secret.txt.enc} was located in \directory{/root/}; the file appeared to be encrypted. In the very same directory, there was a subdirectory called \directory{.keys/} that contained a file called \file{passwd-file}. It would seem that this file contained the password used when encrypting the secret. The content of the password file is shown below.
+\verbatiminput{passwd-file}
+In order to analyze things more carefully, we copied the encrypted secret and the password file to the home folder of \user{jason} and then to our local machine using \program{scp}. The encrypted file started with a string ``Salted\_\_''. Googling on the corresponding bytes in hexadecimal seemed to indicate that it was the work of OpenSSL. This agreed with similar cases in the solutions for the lab last year, which we had asked for and received from Sofia. Not at all knowing which of the 100 encryption methods shown to be available in \program{openssl} when executing \command{openssl enc .} had been used, we created a bash script for trying each and every one of them. The script is shown in \autoref{lst:decrypt} below.
+
+\lstinputlisting[
+  label=lst:decrypt,
+  caption={A Bash script for decrypting the secret.}
+]
+                {foo2.sh}
+The first 34 lines of the script is just assigning a variable an array of the available encryption methods (or cipher commands). Line 36--38 constitute a loop whose body is executed once for each cipher command. The command on line 37 is the one doing all the decryption. The first appearance of \verb|$command| specifies the cipher command, the \flag{d} flag denotes decryption, the \parameter{in} and \parameter{out} parameters specify the input file to decrypt and the output file in which to store the result, and the \parameter{pass} parameter specifies the password to use when decrypting. As can be seen, the output file for each decryption is specified to be placed in the directory \directory{output} and be named after the cipher command used.
+
+After having executed the shell script, all the output files were manually scanned for intelligible information. It turned out that the output file corresponding to the cipher command aes-256-ofb contained the secret in plaintext. The code read: P2EOlbVN4vf5A, and the secret in its entirety is shown below.
+\verbatiminput{secret_30.txt}
+
+
+
+
+
