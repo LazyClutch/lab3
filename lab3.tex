@@ -22,15 +22,16 @@
 %   * lstinputlistings command for listing code from a file
 %   * lstinline command for code appearing in the middle of a sentence
 \usepackage{listings}
-\lstset{%
-  language=Bash,
-  frame=single,
+\lstset{
+  language=sh,
   numbers=left,
-%  basicstyle=\ttfamily,
+  numberstyle=\tiny,
+  columns=fullflexible,
+  basicstyle=\footnotesize\ttfamily,
   breaklines=true,
-  columns=fullflexible
+  breakautoindent=true,
+  breakindent=4em
 }
-
 
 \usepackage{xcolor}
 

@@ -1,0 +1,6 @@
+security@BB:~$ sudo nmap -Pn -v -A 192.168.233.110
+...
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+3389/tcp open  ms-wbt-server Microsoft Terminal Service
+...
