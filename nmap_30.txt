@@ -1,0 +1,12 @@
+security@BB:~$ nmap -v -A 192.168.233.30
+...
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.9p1 Debian 5ubuntu1.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 1024 e8:db:f6:d5:52:fd:ab:68:08:2b:7d:fe:6f:24:df:2a (DSA)
+| 2048 91:58:ee:38:84:98:82:42:33:86:c2:c7:04:e0:1e:f2 (RSA)
+|_256 b6:d6:f7:fa:a5:c2:44:7e:08:49:db:06:31:b4:b6:2d (ECDSA)
+80/tcp open  http    Apache httpd 2.2.22 ((Ubuntu))
+|_http-methods: GET HEAD POST OPTIONS
+|_http-title:       Nuyorican Poets Cafe    
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+...

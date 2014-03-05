@@ -1,0 +1,4 @@
+[DATA] attacking service ssh on port 22
+[STATUS] 256.00 tries/min, 256 tries in 00:01h, 2753 todo in 00:11h, 16 active
+[STATUS] 218.67 tries/min, 656 tries in 00:03h, 2353 todo in 00:11h, 16 active
+[22][ssh] host: 192.168.233.30   login: jason   password: cuteme
